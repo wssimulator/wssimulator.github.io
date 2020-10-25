@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script>
+function includeHTML() {
+  var z, i, elmnt, file, xhttp;
+  /*loop through a collection of all HTML elements:*/
+  z = document.getElementsByTagName("*");
+  for (i = 0; i < z.length; i++) {
+    elmnt = z[i];
+    /*search for elements with a certain atrribute:*/
+    file = elmnt.getAttribute("w3-include-html");
+    if (file) {
+      /*make an HTTP request using the attribute value as the file name:*/
+      xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4) {
+          if (this.status == 200) {elmnt.innerHTML = this.responseText;}
+          if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
+          /*remove the attribute, and call this function once more:*/
+          elmnt.removeAttribute("w3-include-html");
+          includeHTML();
+        }
+      }
+      xhttp.open("GET", file, true);
+      xhttp.send();
+      /*exit the function:*/
+      return;
+    }
+  }
+};
+</script>
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+</style>
+<body class="w3-light-grey" style="color: rgb(0, 51, 153);
+    background-color: rgb(255, 255, 255); background-image:
+    url(images/blutextb.gif);" >
+
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+  
+    <!-- Left Column -->
+
+    <div class="w3-third">
+      <div class="w3-white w3-text-black w3-card-4">
+        <div class="w3-display-container">
+          <!-- img src="images/photo2.png" style="width:100%" alt="Avatar">
+          <div class="w3-display-bottomleft w3-container w3-text-white"-->
+            <center>
+                </br>
+                <h2>Work Stealing Simulator</h2>
+                </br>
+                <img src="../images/SCHEDULINGCLASSIC.png" style="width:40%" alt="Avatar">
+                <hr>
+            </center>
+          <!--/div-->
+        </div>
+        <div class="w3-container">
+
+           <div w3-include-html="../pages/sitemap.html"></div>
+
+        </div>
+      </div><br>
+      <!-- End Left Column -->
+    </div>
+
+    <!-- Right Column -->
+    <div class="w3-twothird">
+
+        <div class="w3-container w3-card w3-white w3-margin-bottom">
+      </br>
+      </br>
+      </br>
+            <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-user-o fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Worl Stealing on one cluster</h2>
+            <div class="w3-container">
+                <p>
+                explain here quickly the model of work stealing one one cluster
+                <hr>
+            </div>
+
+            <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-user-o fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i> One cluster topology</h2>
+            <div class="w3-container">
+                <p>
+                Explain here quickly the one cluster topology 
+                <hr>
+            </div>
+
+
+            <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-user-o fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i> Communication issue one cluster topology</h2>
+            <div class="w3-container">
+                <p>
+                explain the problem behind the communication cost
+                <hr>
+            </div>
+
+
+
+      </div>
+    <!-- End Right Column -->
+    </div>
+    
+  <!-- End Grid -->
+  </div>
+  
+  <!-- End Page Container -->
+</div>
+
+<script>
+includeHTML();
+</script>
+</body>
+</html>
