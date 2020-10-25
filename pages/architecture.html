@@ -149,12 +149,30 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                 The <strong>processor engine</strong> uses <strong>topology engine</strong> to manage communications and interactions between the processors,
                 The <strong>processor engine</strong> uses <strong>task engine</strong> to manage the execution of their tasks. 
 
-
+   <h3 class="w3-text-black w3-padding-16">Topology engine</h3>
+                <p>
+                  A topology defines the distribution of the processors on the platform and the communication characteristics between them.
+                  The <strong>topology engine</strong> is used for knowing the communication time between two processors during a steal operation.
+                  Moreover, since the victim selection strategy depends on the processor topology, the <strong>topology engine</strong> is also used
+                  to manage different victim selection strategies.
+                  The <strong>topology engine<strong> is also used to manage different parameters which are used by the Work Stealing algorithm during
+                  an execution, for example, <u>is_simultaneous</u> is used to determine if a processor can send work to several processors atthe same time.
+                  It also defines <u>steal threshold</u> parameters which can be static or depend on the communication time.
             <h3 class="w3-text-black w3-padding-16">Task engine</h3>
                 <p>
-            <h3 class="w3-text-black w3-padding-16">Topology engine</h3>
-                <p>
-                <p>
+                  The <b>task engine</b> is used to handle everything related to the application duringa simulation.
+                  It provides an operating interface which offers all the needed functionalities to manage tasks 
+                  (create a new task during a simulation, split tasks during a steal request, generates the merge task if necessary, 
+                  update the task dependencies, activate one or more tasks as in case of DAG task, ...)
+                  
+                  The <b>task engine</b> offers the mechanism to detect the end of an execution. It uses two global variables,
+                  one to compute the number of created tasks in the system, and the second to compute the number of completed tasks.
+                  The execution finishes when the created tasks are equal to the completed tasks.
+                  
+                  The <b>task engine</b> offers also different functions that automatically generate different application based on DAG tasks.
+                  It also offers a function to use a predefined application as input. For this, the predefined application must be described in <b>JSON</b>
+                  format.
+                  
             <h3 class="w3-text-black w3-padding-16">Log engine</h3>
                 <p>
 
