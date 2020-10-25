@@ -79,14 +79,43 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       </br>
       </br>
       </br>
-            <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-book-open fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>WS-Simulator Architecture</h2>
+            <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>WS-Simulator Architecture</h2>
             <div class="w3-container">
                 <p>
-                Put here the image of ws-simulator
+                The WS-Simulator is used to experimentally analyze different variants ofWork Stealing.
+                Thus, it should handle the different variants of Work Stealing Algorithm.
+                Moreover, the simulator needs to manage the different types of application,
+                the different topologies and all other variants.
+
+                </p>
+                <p>
+                WS-Simulator is designed to be sufficiently flexible in order to simulate different Work 
+                Stealing models. Its flexibility aims to allow us to experiment with different
+                Work Stealing algorithms, different topologies, different steal strategies
+                and different types of application. The simulator should also generate a sufficient amount of 
+                logs for a detailed analysis each tested scenario.
+
+                </p>
+                <p>
+                The overall architecture of WS-Simulator is composed of sixmain engines, as seen on Figure bellow.
+                The event engine isthe core of our simulator,
+                it manages the processors events during the time to run the simulation of a scenario.
+                Theevents are executed through the processor engine which provides different functionalities
+                to perform theWork Stealingalgorithm.
+                The processor engine uses the task engine to manage the execution of tasks and uses the topology
+                engineto manage the interactions between the processors.
+                During the execution of a simulation, the log engine keeps track ofdifferent information
+                and generates different logs.
+                The rest of this section details the role of each engine and explainsthe interactions between them.
+
+                </p>
+                <center>
+                <img src="../images/simulatorArchitecture.png" style="width:70%" alt="Avatar">
+                </center>
                 <hr>
             </div>
 
-            <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-book-open fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>WS-Simulator Engines</h2>
+            <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>WS-Simulator Engines</h2>
             <div class="w3-container">
                 <p>
                 explain quickly the role of each engines
