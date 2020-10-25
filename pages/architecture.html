@@ -116,9 +116,47 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
             </div>
 
             <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>WS-Simulator Engines</h2>
+
             <div class="w3-container">
                 <p>
-                explain quickly the role of each engines
+                In the Work Stealing algorithm, a processor switches between different possible states : 
+                Each processor interacts when it becomes idle, when it receives a steal request 
+                or when it receives a steal answer.
+                The global idea of our simulator consists in simulating a set of discrete events through time
+                instead of simulating the whole execution time, 
+                where an event stands for changing the state of a processor at a specific time.
+                For that:
+                
+                <h3 class="w3-text-black w3-padding-16">Event engine</h3>
+                <p>
+                The event engine represents the kernel of the simulator.
+                it lists the available events on a heap and executes them sequentially according to their time.
+                The execution of events follows different steps to update the system and creates new events
+                in the global heap, these events will be executed following the same mechanism.
+                We define an event by its time, its related processors and its type.
+                
+                The execution of an event interacts on the related processors and orders it to update
+                its state and creates other events. The execution time is defined by the last executed event.
+
+            <h3 class="w3-text-black w3-padding-16">Processor engine</h3>
+                <p>
+                The processor engine manages the processors state on the simulator,
+                it offers all necessary functionalities to update aprocessor when a related event occurs.
+                These functions apply the mechanism of Work Stealing algorithm.
+
+                The processor engine uses topology engine to manage communications and interactions between
+                the processors,
+                The processor engine uses task engine to manage the execution of their tasks. 
+
+
+            <h3 class="w3-text-black w3-padding-16">Task engine</h3>
+                <p>
+            <h3 class="w3-text-black w3-padding-16">Topology engine</h3>
+                <p>
+                <p>
+            <h3 class="w3-text-black w3-padding-16">Log engine</h3>
+                <p>
+
                 <hr>
             </div>
 
