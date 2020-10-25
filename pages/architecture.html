@@ -175,8 +175,24 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                   
             <h3 class="w3-text-black w3-padding-16">Log engine</h3>
                 <p>
-
-                <hr>
+                  The simulator is used to experimentally analyze different models of Work Stealing algorithm. 
+                  It should therefore generate sufficient results that simplify the analysis of the execution of a scenario. 
+                  For this reason, the <b>log engine</b> isused to provide different functionalities to keep trace of different
+                  information during the execution.
+                  
+                  Several pieces of information are needed to analyze the execution of a scenario. 
+                  For instance, we need the global execution information such as <i>execution time</i> and the <i>number of steal requests</i>. 
+                  These results are presented in digital format. Other information are useful like the <i>processes state</i> over the whole execution
+                  or the <i>final shape</i> of the application executed.
+                  
+                  The <b>log engine</b> uses <b>processor engine</b> and <b>task engine</b> functionalities to keep track of simulation information.
+                  the overall results like (execution time, number of successful and failed steal requests, total workexecuted, etc...) are displayed in 
+                  the console in digital format. Moreover, other logs need to be transformed into graphic format using standard trace analysis tools.
+                  The log are expained in details in this link : 
+                  <a href="/pages/wssimulator-logs.html">ws-simulator logs<a>
+                  
+                  
+                  <hr>
             </div>
 
 
