@@ -82,14 +82,196 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
             <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-github-square fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Download WS-Simulator</h2>
             <div class="w3-container">
                 <p>
-                Put here github link and some command lines to clone and requirement packages
+                The use ws-simulator, clone the code source from github : 
+                <a href="https://github.com/wssimulator/simulator" > https://github.com/wssimulator/simulator</a>
+                </p>
                 <hr>
             </div>
 
             <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-terminal fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Use WS-Simulator</h2>
             <div class="w3-container">
                 <p>
-                Put here First command to use ws-simulator
+                The simulator is develped with Python, Thus to use it, you need to install <b><a href="https://www.python.org/downloads/">Python 3.x</a></b>.
+                To run simulation, go to simylation folder (cloned from github), then go to <i>src/</i> folder:
+                </p>
+
+                <p>First test, test simulator using python 3.x
+                <pre style="background: #e4e8ea;padding: 0.5em 0.75em;" ><span class="geshifilter"><code class="text geshifilter-text">~/simulator/src $  python3.5 simulator.py</code></span></pre>
+
+                The result should be like :
+                <pre style="background: #e4e8ea;padding: 0.5em 0.75em;" ><span class="geshifilter"><code class="text geshifilter-text">#using seed 0.043636
+#PROCESSORS: 4, RUNS: 1
+#proba  latency  runTime  processors  input-work-size  taskThreshold  W0 W1  IWR EWR
+0.5	1	34	4	100	100	100	0	21	0
+</code></span></pre>
+
+The default execution of <i>simulator.py</i> run simulation using 4 processors on a task with load egale 100 and latency egale 1</br>
+</br>  
+We explain the results as follow :</br> 
+&nbsp &nbsp  - line 1 shows the <b>seed number</b>, so we can reproduce the same simulation using this seed 
+</br>  
+&nbsp &nbsp  - line 2 shows the <b>number of processor</b> used in the simulation and the number of simulation
+</br>  
+&nbsp &nbsp  - line 3 shows the columns name  of the results, for example : 
+</br> 
+&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp colum 1 shows the <b>probability</b>, column 2 shows the <blatency</b>, column 3 shows the execution time ...  
+</br>  
+&nbsp &nbsp  - line 4 shows the in details the result of the first simulation 
+<hr></div>
+
+            <div class="w3-container">
+                <h3>Configure a simulation</h3>
+
+                <p> To configure the number of <b>processors</b>, use the option <b>-p </b></p>
+                <p>  For example to run a simulation with 16 processors we use :</p>
+<pre style="background: #e4e8ea;padding: 0.5em 0.75em;" >
+<span class="geshifilter"><code class="text geshifilter-text" style="background: #e4e8ea;padding: 0.5em 0.75em;" >~/simulator/src $  python3.5 simulator.py -p 16</code></span>
+</pre>
+<hr>
+                <p> To configure the size of the first tasks, use the option <b>-iws </b></p>
+                <p>  For example to run a simulation with 16 processors and <b>10000 unit independent tasks</b>  we use :</p>
+<pre style="background: #e4e8ea;padding: 0.5em 0.75em;" >
+<span class="geshifilter"><code class="text geshifilter-text" style="background: #e4e8ea;padding: 0.5em 0.75em;" >~/simulator/src $  python3.5 simulator.py -p 16 -iws 10000</code></span>
+</pre>
+
+<hr>
+<p> We can also configure a range of value for the size of the first tasks, use the option <b>-iwsconf </b> with 3 values:<br>
+                (min_input_work_size,  max_input_work_size, multiplicative_step)</p>
+<p>  For example to run a simulation with 16 processors and <b>10, 100 and 10000 unit independent tasks</b>  we use :</p>
+<pre style="background: #e4e8ea;padding: 0.5em 0.75em;" >
+<span class="geshifilter"><code class="text geshifilter-text" style="background: #e4e8ea;padding: 0.5em 0.75em;" >~/simulator/src $  python3.5 simulator.py -p 16 -iwsconfig 10 10000 10</code></span>
+</pre>
+
+
+<hr>
+                <p> With the simulator, we can alse run several simulations in the same time using the option <b>-r </b></p>
+                <p>  For example to run 10 simulations with 16 processors and <b>10000 unit independent tasks</b>  we use :</p>
+<pre style="background: #e4e8ea;padding: 0.5em 0.75em;" >
+<span class="geshifilter"><code class="text geshifilter-text" style="background: #e4e8ea;padding: 0.5em 0.75em;" >~/simulator/src $  python3.5 simulator.py -p 16 -iws 10000 -r 10</code></span>
+</pre>
+In the resulst we will see the result of the 10 simulation, each in line as follow: 
+                <pre style="background: #e4e8ea;padding: 0.5em 0.75em;" ><span class="geshifilter"><code class="text geshifilter-text">#using seed 0.068034
+#PROCESSORS: 16, RUNS: 10
+#proba  latency  runTime  processors  input-work-size  taskThreshold  W0 W1  IWR EWR
+0.5	1	662	16	10000	100	10000	0	305	0
+0.5	1	657	16	10000	100	10000	0	267	0
+0.5	1	669	16	10000	100	10000	0	363	0
+0.5	1	655	16	10000	100	10000	0	248	0
+0.5	1	656	16	10000	100	10000	0	253	0
+0.5	1	667	16	10000	100	10000	0	338	0
+0.5	1	666	16	10000	100	10000	0	338	0
+0.5	1	654	16	10000	100	10000	0	242	0
+0.5	1	664	16	10000	100	10000	0	322	0
+0.5	1	665	16	10000	100	10000	0	331	0
+</code></span></pre>
+
+
+
+
+<hr>
+<p> For more information about the available option use, use the option <b>-h </b></p>
+<pre style="background: #e4e8ea;padding: 0.5em 0.75em;" >
+<span class="geshifilter"><code class="text geshifilter-text" style="background: #e4e8ea;padding: 0.5em 0.75em;" >~/simulator/src $  python3.5 simulator.py -h</code></span>
+</pre>
+
+ The result should be like :
+<pre style="background: #e4e8ea;padding: 0.5em 0.75em;" ><span class="geshifilter"><code class="text geshifilter-text">usage: simulator.py [-h] [-rsp REMOTE_STEAL_PROBABILITY]
+              [-samax STEAL_ATTEMPT_MAX] [-samin STEAL_ATTEMPT_MIN]
+              [-vss VICTIM_SELECTION_STRATEGY]
+              [-samaxconf STEAL_ATTEMPT_CONF STEAL_ATTEMPT_CONF STEAL_ATTEMPT_CONF]
+              [-rspconf PROBA_CONF PROBA_CONF PROBA_CONF]
+              [-lconf LATENCIES_CONF LATENCIES_CONF LATENCIES_CONF]
+              [-iwsconf IWS_CONFIG IWS_CONFIG IWS_CONFIG]
+              [-p PROCESSORS] [-c CLUSTERS] [-iws WORK_SIZE]
+              [-l LATENCY] [-s SEED] [-r RUNS] [-tasks] [-adapt] [-d]
+              [-tt TASK_THRESHOLD [TASK_THRESHOLD ...]]
+              [-lg LOCAL_GRANULARITY] [-rg REMOTE_GRANULARITY]
+              [-f LOG_FILE] [-sim] [-json_in JSON_FILE_IN]
+              [-json_out JSON_FILE_OUT] [-svgts SVG_TIME_SCAL]
+              [-blk_factor BLOCK_FACTOR] [-itc INIT_TASK_COST]
+              [-gbn GEO_BLK_NUMBER] [-ibs INIT_BS] [-mbs MAX_BS]
+              [-config_type CONFIG_TYPE]
+
+simulate work stealing algorithm
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -rsp REMOTE_STEAL_PROBABILITY
+                        probability of stealing remotely
+  -samax STEAL_ATTEMPT_MAX
+                        max internal steal attempts
+  -samin STEAL_ATTEMPT_MIN
+                        mix internal steal attempts (used when vss=2)
+  -vss VICTIM_SELECTION_STRATEGY
+                        victim_selection_strategy, (0:probabilist, 1:static)
+  -samaxconf STEAL_ATTEMPTION_CONFIG STEAL_ATTEMPTION_CONFIG STEAL_ATTEMPTION_CONFIG
+                        interval config of stealing attemption max ,
+                        (-samaxconf min_sam max_sam step)
+  -rspconf PROBABILITIES_CONFIG PROBABILITIES_CONFIG PROBABILITIES_CONFIG
+                        interval config of stealing remotely probabilities ,
+                        (-rspconf min_probability max_probability step)
+  -lconf LATENCIES_CONFIG LATENCIES_CONFIG LATENCIES_CONFIG
+                        interval config of latencies , (-lconf min_latency
+                        max_latency step)
+  -iwsconf IWS_CONFIG IWS_CONFIG IWS_CONFIG
+                        interval config of input work size, (-iwsconf
+                        min_input_work_size max_input_work_size
+                        multiplicative_step)
+  -p PROCESSORS         total number of processors
+  -c CLUSTERS           total number of clusters
+  -iws WORK_SIZE        Input Work Size
+  -l LATENCY            latency for remote steal
+  -s SEED               random seed
+  -r RUNS               number of runs to execute
+  -tasks                use tree tasks
+  -adapt                use adaptive tasks
+  -d                    activate traces
+  -tt TASK_THRESHOLD [TASK_THRESHOLD ...]
+                        threshold for real tasks
+  -lg LOCAL_GRANULARITY
+                        local stealing granularity
+  -rg REMOTE_GRANULARITY
+                        remote stealing granularity
+  -f LOG_FILE
+  -sim                  activate simultaneously steal
+  -json_in JSON_FILE_IN
+  -json_out JSON_FILE_OUT
+  -svgts SVG_TIME_SCAL  svg time scal
+  -blk_factor BLOCK_FACTOR
+  -itc INIT_TASK_COST
+  -gbn GEO_BLK_NUMBER
+  -ibs INIT_BS
+  -mbs MAX_BS
+  -config_type CONFIG_TYPE
+  0-sqrt_dynamic, 1-log_dynamic, 2-sqrt_static,
+</code></span></pre>
+
+
+
+
+
+
+<hr>
+            </div>
+
+
+
+
+      </div>
+    <!-- End Right Column -->
+    </div>
+    
+  <!-- End Grid -->
+  </div>
+  
+  <!-- End Page Container -->
+</div>
+
+<script>
+includeHTML();
+</script>
+</body>
+</html>
                 <hr>
             </div>
 
