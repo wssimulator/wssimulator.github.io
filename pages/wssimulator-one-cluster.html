@@ -79,27 +79,98 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
       </br>
       </br>
       </br>
-            <h2 class="w3-text-grey w3-padding-16"><i class="fas fa-book-open fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Worl Stealing on one cluster</h2>
+            <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Worl Stealing on one cluster</h2>
             <div class="w3-container">
                 <p>
-                explain here quickly the model of work stealing one one cluster
+                In our Work, we are interested in <i>Work stealing algorithm</i> with an <b>explicit latency</b> on a one cluster topology.
+                In our model, the processor are linked via a not uniform interconnection network. 
+                And the processors communicate through this interconnection network.
+                Thus, we consider that communications are explicit (latency or bandwidth) and costly
+                <p>
+                In the first step, we consider the model with communication latency. The simulator is able to run simulations to analyse the impact of the latency on the Makepane.
+                
+                <br>
+                <center>
+                <img src="../images/ws.png" style="width:50%" alt="Avatar">
+                </center> 
+
+                <p>
+                This page describes the adequate configurations and the steps needed to run the simulation on <b>One-cluster</b>
                 <hr>
             </div>
 
-            <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-user-o fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i> One cluster topology</h2>
+            <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-terminal fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i> Simulation With WS-Simulator</h2>
             <div class="w3-container">
                 <p>
-                Explain here quickly the one cluster topology 
+                To run simulation, you can follow the steps described in <a  href="use-wssimulator.html">Download and use WS-Simulator</a>
+
                 <hr>
             </div>
 
-
-            <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-user-o fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i> Communication issue one cluster topology</h2>
+            <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-terminal fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i> Case study : Validation the theoretical analysis</h2>
             <div class="w3-container">
                 <p>
-                explain the problem behind the communication cost
+                In Order to reproduce the simulation used in <a href="https://www.researchgate.net/publication/324908519_A_new_analysis_of_Work_Stealing_with_latency"> Analysis of Work Stealing with latency</a>, the <a href="https://github.com/wssimulator/simulator/tree/main/one-cluster">scripts</a> are available on github. 
+
                 <hr>
+                <p>
+                 Here, we explain how we can reproduce the simulation and trace the comparison (between theoretical and experimental) results in boxplot format.
+
+                 <p>
+                 Recall that the simulator is developed in <b>PYTHON</b>, So to use the simulator you need to install Python3.5.
+                 If you don't have the simulator, clone it:
+
+<pre style="background: #e4e8ea;padding: 0.5em 0.75em;" >
+<span class="geshifilter"><code class="text geshifilter-text" style="background: #e4e8ea;padding: 0.5em 0.75em;" >~/ $ git clone git@github.com:wssimulator/simulator.git  </code></span>
+</pre>
+
+        <hr>
+                <p> 
+                The scripts are in <b>one-cluster/scripts</b> :
+
+                <pre style="background: #e4e8ea;padding: 0.5em 0.75em;" ><span class="geshifilter"><code class="text geshifilter-text">~/simulator/one-cluster/scripts $  ls</code></span>
+  genere_boxp_data.sh  Makefile     one-cluster-simulations.sh
+  genere_ratioWP.sh    makefile.in  result_formula.gnu
+</code></span></pre>
+
+        <hr>
+
+                <p>
+                We can use <i>makefile.in</i> to configure our simulation. for example to run 200 simulations for latency=500, we can do :
+
+<pre style="background: #e4e8ea;padding: 0.5em 0.75em;" >
+<span class="geshifilter"><code class="text geshifilter-text" style="background: #e4e8ea;padding: 0.5em 0.75em;" >~/simulator/one-cluster/scripts $ make simule RUN=1000 LATENCY=500  </code></span>
+</pre>
+
+        <hr>
+<p>Then, once the simulation finish, we can find the results in : <i>~/simulator/one-cluster/data/data-from-simulator/"</i>
+<pre style="background: #e4e8ea;padding: 0.5em 0.75em;" >
+<span class="geshifilter"><code class="text geshifilter-text" style="background: #e4e8ea;padding: 0.5em 0.75em;" >~/simulator/one-cluster/data/data-from-simulator/ $ ls
+   one-cluster-latency-128  one-cluster-latency-32
+   one-cluster-latency-256  one-cluster-latency-64
+</code></span>
+</pre>
+        <hr>
+        <p>Next, you need to use <i>genere_boxp_data.sh</i> to prepare data for boxplot format, this script computes the ratio between the theoretical bound and the simulation results as described in <a href="https://www.researchgate.net/publication/324908519_A_new_analysis_of_Work_Stealing_with_latency">Analysis of Work Stealing with latency</a>  
+                <hr>
+                <p>
+                You can use makefile to perform this step : 
+
+<pre style="background: #e4e8ea;padding: 0.5em 0.75em;" >
+<span class="geshifilter"><code class="text geshifilter-text" style="background: #e4e8ea;padding: 0.5em 0.75em;" >~/simulator/one-cluster/scripts $ make prepar-boxp-data RUN=1000 LATENCY=500  </code></span>
+</pre>
+
+
+                <hr>
+                <p> Then, you can use gnuplot to trace boxplot figures. you can use the script <i>result_formula.gnu</i> or use the makefile command as:
+
+<pre style="background: #e4e8ea;padding: 0.5em 0.75em;" >
+<span class="geshifilter"><code class="text geshifilter-text" style="background: #e4e8ea;padding: 0.5em 0.75em;" >~/simulator/one-cluster/scripts $ make trace-comparaison RUN=1000 LATENCY=500</code></span>
+</pre>
+                <hr>
+
             </div>
+
 
 
 
